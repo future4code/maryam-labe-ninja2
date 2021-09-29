@@ -1,9 +1,10 @@
 import React from 'react'
-import { AppContainer } from './components/AppContainer'
+import PageCreateJob from './components/PageCreateJob'
+
 
 function App() {
 	return (
-        <AppContainer />
+        <PageCreateJob />
 	)
 }
 
