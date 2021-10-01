@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const CardContainer = styled.div`
   width: 200px;
   height: 250px;
@@ -22,8 +23,6 @@ export default class CardJobs extends React.Component {
   render() {
     return (
       <div>
-        <p>header</p>
-        <h1>Contrate</h1>
         <CardContainer>
           <CardProduct>
             <h3>{this.props.titulo}</h3>
