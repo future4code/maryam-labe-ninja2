@@ -21,10 +21,14 @@ const FonteTitulo = styled.div`
   font-family: "Hamster";
   font-size: 9vh;
 `;
+
 const FiltersContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+
+
 
 const headers = {
   headers: { Authorization: "c43362f5-2583-4aca-b697-473c96f57416" },
@@ -33,17 +37,22 @@ const headers = {
 export default class PageGetJobs extends React.Component {
   state = {
     currentPage: "cardJobs",
+
     jobs: [],
     query: "",
     minPrice: "",
     maxPrice: "",
     sort:"title",
     order:1,
+
+    idDoJob: ""
+
   };
 
   componentDidMount = () => {
     this.GetJobs();
   };
+
 
   updateQuery = (event) => {
     this.setState({ query: event.target.value });
@@ -63,8 +72,11 @@ export default class PageGetJobs extends React.Component {
     this.setState({order:event.target.value})
   }
 
-  changePage = (nomeDaPagina) => {
-    this.setState({ currentPage: nomeDaPagina });
+ 
+
+  changePage = (nomeDaPagina, jobId) => {
+    this.setState({ currentPage: nomeDaPagina, idDoJob: jobId });
+
   };
 
   GetJobs = () => {
@@ -72,6 +84,9 @@ export default class PageGetJobs extends React.Component {
     axios
       .get(url, headers)
       .then((response) => {
+
+  
+
         this.setState({ jobs: response.data.jobs });
       })
       .catch((error) => {
@@ -82,6 +97,7 @@ export default class PageGetJobs extends React.Component {
   render() {
     const renderCurrentPage = () => {
       if (this.state.currentPage === "cardJobs") {
+
         const jobs = this.state.jobs
 
           .filter((cadaJob) => {
@@ -170,29 +186,23 @@ export default class PageGetJobs extends React.Component {
         <Main>{jobs}</Main>
           </div>
         )
+
+
+
       } else if (this.state.currentPage === "paginaDetalhe") {
-        const jobs = this.state.jobs.map((cadaJob) => {
-          return (
-            <PageDetails
-              changePage={this.changePage}
-              key={cadaJob.id}
-              titulo={cadaJob.title}
-              prazo={cadaJob.dueDate}
-              preco={cadaJob.price}
-              descricao={cadaJob.description}
-              pagamento={cadaJob.paymentMethods}
-            />
-          );
-        });
-        return jobs;
+        return <PageDetails changePage={this.changePage} jobId={this.state.idDoJob}/>
       } else {
         return "Página não encontrada";
       }
     };
     return (
+
       <div>
         <Main>{renderCurrentPage()}</Main>
       </div>
+
+  
     );
   }
 }
+

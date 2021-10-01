@@ -7,6 +7,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  /* border:1px solid blue; */
 `;
 const CardProduct = styled.div`
   height: 180px;
@@ -25,10 +26,10 @@ export default class CardJobs extends React.Component {
         <CardContainer>
           <CardProduct>
             <h3>{this.props.titulo}</h3>
-            <p>{this.props.prazo}</p>
-            <p>R${this.props.preco}</p>
+            <p>{this.props.prazo.slice(0, 10)}</p>
+            <p>R${this.props.preco.toFixed(2)}</p>
           </CardProduct>
-          <button onClick={() => this.props.changePage("paginaDetalhe")}>
+          <button onClick={() => this.props.changePage("paginaDetalhe", this.props.jobId)}>
             Detalhe do Produto
           </button>
           <button>Adicionar ao carrinho</button>
