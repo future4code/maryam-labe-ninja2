@@ -88,7 +88,7 @@ export default class PageCreateJob extends React.Component {
     return (
       <FormContainer>
         <FonteTitulo>
-          <h1>cadastra-se</h1>
+          <h1>cadastre-se</h1>
         </FonteTitulo>
         <Formulario>
           <input
