@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
 export default class PageBuy extends React.Component {
-    render(){
-        return (
-            <div>
-                
-            </div>
-        )
-    }
-}
+   render(){
+       return<div>PageBuy</div>
+
+   }
+}    
+   
+
+ 
