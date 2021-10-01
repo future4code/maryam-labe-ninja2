@@ -14,6 +14,8 @@ const FonteTitulo = styled.div`
   font-family: "Hamster";
   font-size: 8vh;
 `;
+
+
 const headers = {
   headers: { Authorization: "c43362f5-2583-4aca-b697-473c96f57416" },
 };
@@ -21,6 +23,7 @@ const headers = {
 export default class PageGetJobs extends React.Component {
   state = {
     currentPage: "cardJobs",
+    idDoJob: "",
     jobs: [
       {
         id: "",
@@ -38,8 +41,8 @@ export default class PageGetJobs extends React.Component {
     this.GetJobs();
   };
 
-  changePage = (nomeDaPagina) => {
-    this.setState({ currentPage: nomeDaPagina });
+  changePage = (nomeDaPagina, jobId) => {
+    this.setState({ currentPage: nomeDaPagina, idDoJob: jobId });
   };
 
   GetJobs = () => {
@@ -47,7 +50,7 @@ export default class PageGetJobs extends React.Component {
     axios
       .get(url, headers)
       .then((response) => {
-        console.log(response.data.jobs);
+        // console.log(response.data.jobs);
         this.setState({ jobs: response.data.jobs });
       })
       .catch((error) => {
@@ -66,25 +69,13 @@ export default class PageGetJobs extends React.Component {
               titulo={cadaJob.title}
               prazo={cadaJob.dueDate}
               preco={cadaJob.price}
+              jobId={cadaJob.id}
             />
           );
         });
         return jobs;
       } else if (this.state.currentPage === "paginaDetalhe") {
-        const jobs = this.state.jobs.map((cadaJob) => {
-          return (
-            <PageDetails
-              changePage={this.changePage}
-              key={cadaJob.id}
-              titulo={cadaJob.title}
-              prazo={cadaJob.dueDate}
-              preco={cadaJob.price}
-              descricao={cadaJob.description}
-              pagamento={cadaJob.paymentMethods}
-            />
-          );
-        });
-        return jobs;
+        return <PageDetails changePage={this.changePage} jobId={this.state.idDoJob}/>
       } else {
         return "Página não encontrada";
       }
@@ -93,10 +84,11 @@ export default class PageGetJobs extends React.Component {
       <StyleFonte>
         <p>header</p>
         <FonteTitulo>
-        <h1>Contrate</h1>
+          <h1>Contrate</h1>
         </FonteTitulo>
         {renderCurrentPage()}
       </StyleFonte>
     );
   }
 }
+
