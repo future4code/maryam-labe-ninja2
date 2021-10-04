@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class AppContainer extends Component {
+export class PageHome extends Component {
   render() {
     return (
       <div>

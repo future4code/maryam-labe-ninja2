@@ -1,10 +1,26 @@
-import React from 'react'
-import { AppContainer } from './components/AppContainer'
+import React from "react";
+import PageCreateJob from "./components/PageCreateJob";
+import PageGetJobs from "./components/PageGetJobs";
+
+
 
 function App() {
+
 	return (
-        <AppContainer />
+		<div>
+        <PageCreateJob />
+		
+		</div>
+		
 	)
+
+  return (
+    <div>
+      
+      <PageGetJobs />
+    </div>
+  );
+
 }
 
-export default App
+export default App;
